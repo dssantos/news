@@ -12,6 +12,8 @@ python -m venv .news
 source .news/bin/activate
 python -m pip install -U pip
 pip install -r requirements.txt
+cp contrib/.env-sample .env
+sed -i "/^SECRET_KEY=/c\SECRET_KEY=$(python contrib/secret_gen.py)" .env
 ```
 
 ### Windows
@@ -23,4 +25,7 @@ Set-ExecutionPolicy Unrestricted -Scope Process -force
 ./.news/Scripts/activate
 python -m pip install -U pip
 pip install -r requirements.txt
+cp contrib/.env-sample .env
+python contrib/secret_gen.py
+# Change SECRET_KEY in .env file
 ```
