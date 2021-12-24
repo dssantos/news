@@ -32,3 +32,12 @@ class UserProfileSerializer(serializers.ModelSerializer):
             instance.set_password(password)
  
         return super().update(instance, validated_data)
+
+
+class NewsSerialzer(serializers.ModelSerializer):
+    """Serializes News"""
+
+    class Meta:
+        model = models.News
+        fields = ('id', 'title', 'text', 'author')
+        extra_kwargs = {'author': {'read_only': True}}
