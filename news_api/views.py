@@ -3,6 +3,7 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
+from rest_framework import filters
 
 from news_api import serializers
 from news_api import models
@@ -41,6 +42,8 @@ class NewsViewSet(viewsets.ModelViewSet):
         permissions.UpdateOwnNews,
         IsAuthenticatedOrReadOnly
     )
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title', 'text')
 
     def perform_create(self, serializer):
         """Sets the logged user to the user profile field"""
